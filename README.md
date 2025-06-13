@@ -4,7 +4,7 @@ This is the official documentation and demo website for the [`zapi-ui`](https://
 
 ## 🌐 Live Demo
 
-Check out the live version of the website here:[[https://zapi-ui.vercel.app](https://zapi-ui.vercel.app)](https://zapi-ui-website.vercel.app)
+Check out the live version of the website here:https://zapi-ui-website.vercel.app
 
 ## 🚀 Getting Started
 
