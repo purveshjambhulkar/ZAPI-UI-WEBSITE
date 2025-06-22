@@ -1,9 +1,21 @@
-
 import { ComponentsSidebar } from "@/components/ComponentsSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { AlertCircle, ArrowRight, Check, ChevronsUpDown, Keyboard, LayoutGrid, TextCursor, Joystick, CheckSquare, CircleDot, FileText, Menu, Bell, BarChart3, MessageSquare, PanelsTopLeft } from "lucide-react";
+import {
+  AlertCircle,
+  ArrowRight,
+  Check,
+  ChevronsUpDown,
+  Keyboard,
+  LayoutGrid,
+  TextCursor,
+  Joystick,
+  CheckSquare,
+  CircleDot,
+  FileText,
+  PanelsTopLeft,
+} from "lucide-react";
 
 const components = [
   {
@@ -13,7 +25,7 @@ const components = [
       { name: "Button", href: "/components/button", icon: <Joystick className="h-4 w-4" /> },
       { name: "Input", href: "/components/input", icon: <TextCursor className="h-4 w-4" /> },
       { name: "Checkbox", href: "/components/checkbox", icon: <CheckSquare className="h-4 w-4" /> },
-      { name: "Radio Group", href: "/components/radio-group", icon: <CircleDot className="h-4 w-4" /> },
+  
       { name: "Textarea", href: "/components/textarea", icon: <FileText className="h-4 w-4" /> },
       { name: "Select", href: "/components/select", icon: <ChevronsUpDown className="h-4 w-4" /> },
     ],
@@ -25,26 +37,7 @@ const components = [
       { name: "Avatar", href: "/components/avatar", icon: <PanelsTopLeft className="h-4 w-4" /> },
       { name: "Badge", href: "/components/badge", icon: <Check className="h-4 w-4" /> },
       { name: "Card", href: "/components/card", icon: <FileText className="h-4 w-4" /> },
-      { name: "Table", href: "/components/table", icon: <LayoutGrid className="h-4 w-4" /> },
       { name: "Carousel", href: "/components/carousel", icon: <PanelsTopLeft className="h-4 w-4" /> },
-    ],
-  },
-  {
-    category: "Navigation",
-    icon: <Menu className="h-5 w-5" />,
-    items: [
-      { name: "Navbar", href: "/components/navbar", icon: <Menu className="h-4 w-4" /> },
-      { name: "Tabs", href: "/components/tabs", icon: <PanelsTopLeft className="h-4 w-4" /> },
-      { name: "Navigation Menu", href: "/components/navigation-menu", icon: <Menu className="h-4 w-4" /> },
-    ],
-  },
-  {
-    category: "Feedback",
-    icon: <Bell className="h-5 w-5" />,
-    items: [
-      { name: "Alert", href: "/components/alert", icon: <AlertCircle className="h-4 w-4" /> },
-      { name: "Progress", href: "/components/progress", icon: <BarChart3 className="h-4 w-4" /> },
-      { name: "Toast", href: "/components/toast", icon: <MessageSquare className="h-4 w-4" /> },
     ],
   },
 ];
@@ -76,9 +69,7 @@ export default function Components() {
                     <Link
                       key={item.name}
                       to={item.href}
-                      className={cn(
-                        "group cursor-pointer",
-                      )}
+                      className={cn("group cursor-pointer")}
                     >
                       <Card className="h-full transition-all hover:shadow-md hover:border-primary/40 overflow-hidden">
                         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">

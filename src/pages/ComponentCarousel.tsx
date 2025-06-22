@@ -1,95 +1,28 @@
-
 import { ComponentsSidebar } from "@/components/ComponentsSidebar";
 import { CodeBlock } from "@/components/CodeBlock";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CheckCheck, Copy, Info } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from "@/components/ui/carousel";
-import { 
-  Card, 
-  CardContent 
-} from "@/components/ui/card";
+import { Carousel } from "zapi-ui"; // ✅ Use from zapi-ui
+import { Card, CardContent } from "@/components/ui/card";
 
-const carouselImportCode = `import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"`;
+const carouselImportCode = `import { Carousel } from "zapi-ui"`;
 
-const carouselBasicCode = `<Carousel className="w-full max-w-xs">
-  <CarouselContent>
-    {Array.from({ length: 5 }).map((_, index) => (
-      <CarouselItem key={index}>
-        <div className="p-1">
-          <Card>
-            <CardContent className="flex aspect-square items-center justify-center p-6">
-              <span className="text-4xl font-semibold">{index + 1}</span>
-            </CardContent>
-          </Card>
-        </div>
-      </CarouselItem>
-    ))}
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
+const carouselBasicCode = `<Carousel>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
 </Carousel>`;
 
-const carouselSizeCode = `import * as React from "react"
-import useEmblaCarousel from "embla-carousel-react"
-import { Card, CardContent } from "@/components/ui/card"
- 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
- 
-export function CarouselSize() {
-  const [api, setApi] = React.useState()
- 
-  return (
-    <Carousel
-      opts={{
-        align: "start",
-      }}
-      className="w-full max-w-sm"
-    >
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="basis-1/2">
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
-  )
-}`;
+const carouselSizeCode = `<Carousel itemsToShow={2}>
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+  <div>Four</div>
+</Carousel>`;
 
 export default function ComponentCarousel() {
   const [copied, setCopied] = useState(false);
@@ -118,14 +51,15 @@ export default function ComponentCarousel() {
               A carousel component for cycling through elements.
             </p>
           </div>
-          
+
           <div className="p-4 bg-muted/40 border rounded-lg flex items-center gap-2">
             <Info className="h-5 w-5 text-blue-500" />
             <p className="text-sm">
-              Built on top of <a href="https://www.embla-carousel.com/" target="_blank" rel="noreferrer" className="font-medium underline underline-offset-4">Embla Carousel</a>.
+              This Carousel is built using plain React and CSS — no third-party slider.
             </p>
           </div>
 
+          {/* Installation */}
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">Installation</h2>
@@ -137,40 +71,25 @@ export default function ComponentCarousel() {
             <CodeBlock code={carouselImportCode} />
           </div>
 
+          {/* Basic Carousel */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Basic Usage</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
+              <TabsList className="w-full justify-start border-b p-0">
+                <TabsTrigger value="preview" className="rounded-none px-4 pb-3 pt-2 font-semibold text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground">
                   Preview
                 </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
+                <TabsTrigger value="code" className="rounded-none px-4 pb-3 pt-2 font-semibold text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground">
                   Code
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="preview" className="rounded-md border p-6 bg-card flex justify-center">
-                <Carousel className="w-full max-w-xs">
-                  <CarouselContent>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <CarouselItem key={index}>
-                        <div className="p-1">
-                          <Card>
-                            <CardContent className="flex aspect-square items-center justify-center p-6">
-                              <span className="text-4xl font-semibold">{index + 1}</span>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+              <TabsContent value="preview" className="border p-6 rounded-md bg-card">
+                <Carousel>
+                  {[1, 2, 3].map((item) => (
+                    <Card key={item} className="text-center">
+                      <CardContent className="p-6 font-semibold text-xl">{`Item ${item}`}</CardContent>
+                    </Card>
+                  ))}
                 </Carousel>
               </TabsContent>
               <TabsContent value="code">
@@ -185,45 +104,25 @@ export default function ComponentCarousel() {
             </Tabs>
           </div>
 
+          {/* Multiple Items Carousel */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Multiple Items</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
+              <TabsList className="w-full justify-start border-b p-0">
+                <TabsTrigger value="preview" className="rounded-none px-4 pb-3 pt-2 font-semibold text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground">
                   Preview
                 </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
+                <TabsTrigger value="code" className="rounded-none px-4 pb-3 pt-2 font-semibold text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground">
                   Code
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="preview" className="rounded-md border p-6 bg-card flex justify-center">
-                <Carousel
-                  opts={{
-                    align: "start",
-                  }}
-                  className="w-full max-w-sm"
-                >
-                  <CarouselContent>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <CarouselItem key={index} className="basis-1/2">
-                        <div className="p-1">
-                          <Card>
-                            <CardContent className="flex aspect-square items-center justify-center p-6">
-                              <span className="text-3xl font-semibold">{index + 1}</span>
-                            </CardContent>
-                          </Card>
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
+              <TabsContent value="preview" className="border p-6 rounded-md bg-card">
+                <Carousel itemsToShow={2}>
+                  {[1, 2, 3, 4].map((item) => (
+                    <Card key={item} className="text-center">
+                      <CardContent className="p-6 font-semibold text-xl">{`Item ${item}`}</CardContent>
+                    </Card>
+                  ))}
                 </Carousel>
               </TabsContent>
               <TabsContent value="code">

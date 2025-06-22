@@ -1,4 +1,3 @@
-
 import { ComponentsSidebar } from "@/components/ComponentsSidebar";
 import { CodeBlock } from "@/components/CodeBlock";
 import {
@@ -7,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "zapi-ui"; // ✅ Using zapi-ui component
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CheckCheck, Copy, Info } from "lucide-react";
@@ -15,11 +14,11 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Label } from "@/components/ui/label";
 
-const textareaImportCode = `import { Textarea } from "@/components/ui/textarea"`;
+const textareaImportCode = `import { Textarea } from "zapi-ui"`;
 
 const textareaBasicCode = `<Textarea placeholder="Type your message here." />`;
 
-const textareaWithLabelCode = `import { Label } from "@/components/ui/label"
+const textareaWithLabelCode = `import { Textarea } from "zapi-ui"
 
 <div className="grid w-full gap-1.5">
   <Label htmlFor="message">Your message</Label>
@@ -28,7 +27,7 @@ const textareaWithLabelCode = `import { Label } from "@/components/ui/label"
 
 const textareaWithButtonCode = `<div className="grid w-full gap-2">
   <Textarea placeholder="Type your message here." />
-  <Button>Send message</Button>
+  <button>Send message</button>
 </div>`;
 
 const textareaDisabledCode = `<Textarea placeholder="Type your message here." disabled />`;
@@ -60,7 +59,7 @@ export default function ComponentTextarea() {
               Displays a form textarea or a component that looks like a textarea.
             </p>
           </div>
-          
+
           <div className="p-4 bg-muted/40 border rounded-lg flex items-center gap-2">
             <Info className="h-5 w-5 text-blue-500" />
             <p className="text-sm">
@@ -68,10 +67,16 @@ export default function ComponentTextarea() {
             </p>
           </div>
 
+          {/* Installation */}
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold">Installation</h2>
-              <Button variant="outline" size="sm" onClick={() => copyToClipboard(textareaImportCode)} className="gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => copyToClipboard(textareaImportCode)}
+                className="gap-2"
+              >
                 {copied ? <CheckCheck className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 Copy
               </Button>
@@ -79,29 +84,25 @@ export default function ComponentTextarea() {
             <CodeBlock code={textareaImportCode} />
           </div>
 
+          {/* Basic Usage */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Basic Usage</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Preview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Code
-                </TabsTrigger>
+              <TabsList className="w-full justify-start border-b bg-transparent p-0">
+                <TabsTrigger value="preview" className="tab-trigger">Preview</TabsTrigger>
+                <TabsTrigger value="code" className="tab-trigger">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="preview" className="rounded-md border p-6 bg-card">
-                <Textarea placeholder="Type your message here." />
+                <Textarea placeholder="Type your message here." value="" onChange={() => {}} />
               </TabsContent>
               <TabsContent value="code">
                 <div className="relative">
-                  <Button variant="outline" size="sm" onClick={() => copyToClipboard(textareaBasicCode)} className="absolute top-2 right-2 gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(textareaBasicCode)}
+                    className="absolute top-2 right-2 gap-2"
+                  >
                     {copied ? <CheckCheck className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     Copy
                   </Button>
@@ -111,32 +112,28 @@ export default function ComponentTextarea() {
             </Tabs>
           </div>
 
+          {/* With Label */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">With Label</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Preview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Code
-                </TabsTrigger>
+              <TabsList className="w-full justify-start border-b bg-transparent p-0">
+                <TabsTrigger value="preview" className="tab-trigger">Preview</TabsTrigger>
+                <TabsTrigger value="code" className="tab-trigger">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="preview" className="rounded-md border p-6 bg-card">
                 <div className="grid w-full gap-1.5">
                   <Label htmlFor="message">Your message</Label>
-                  <Textarea placeholder="Type your message here." id="message" />
+                  <Textarea id="message" placeholder="Type your message here." value="" onChange={() => {}} />
                 </div>
               </TabsContent>
               <TabsContent value="code">
                 <div className="relative">
-                  <Button variant="outline" size="sm" onClick={() => copyToClipboard(textareaWithLabelCode)} className="absolute top-2 right-2 gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(textareaWithLabelCode)}
+                    className="absolute top-2 right-2 gap-2"
+                  >
                     {copied ? <CheckCheck className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     Copy
                   </Button>
@@ -146,32 +143,28 @@ export default function ComponentTextarea() {
             </Tabs>
           </div>
 
+          {/* With Button */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">With Button</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Preview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Code
-                </TabsTrigger>
+              <TabsList className="w-full justify-start border-b bg-transparent p-0">
+                <TabsTrigger value="preview" className="tab-trigger">Preview</TabsTrigger>
+                <TabsTrigger value="code" className="tab-trigger">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="preview" className="rounded-md border p-6 bg-card">
                 <div className="grid w-full gap-2">
-                  <Textarea placeholder="Type your message here." />
+                  <Textarea placeholder="Type your message here." value="" onChange={() => {}} />
                   <Button>Send message</Button>
                 </div>
               </TabsContent>
               <TabsContent value="code">
                 <div className="relative">
-                  <Button variant="outline" size="sm" onClick={() => copyToClipboard(textareaWithButtonCode)} className="absolute top-2 right-2 gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(textareaWithButtonCode)}
+                    className="absolute top-2 right-2 gap-2"
+                  >
                     {copied ? <CheckCheck className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     Copy
                   </Button>
@@ -181,29 +174,25 @@ export default function ComponentTextarea() {
             </Tabs>
           </div>
 
+          {/* Disabled */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">Disabled</h2>
             <Tabs defaultValue="preview" className="w-full">
-              <TabsList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-                <TabsTrigger
-                  value="preview"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Preview
-                </TabsTrigger>
-                <TabsTrigger
-                  value="code"
-                  className="rounded-none border-b-2 border-b-transparent bg-transparent px-4 pb-3 pt-2 font-semibold text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:shadow-none"
-                >
-                  Code
-                </TabsTrigger>
+              <TabsList className="w-full justify-start border-b bg-transparent p-0">
+                <TabsTrigger value="preview" className="tab-trigger">Preview</TabsTrigger>
+                <TabsTrigger value="code" className="tab-trigger">Code</TabsTrigger>
               </TabsList>
               <TabsContent value="preview" className="rounded-md border p-6 bg-card">
-                <Textarea placeholder="Type your message here." disabled />
+                <Textarea placeholder="Type your message here." value="Read-only content" onChange={() => {}} disabled />
               </TabsContent>
               <TabsContent value="code">
                 <div className="relative">
-                  <Button variant="outline" size="sm" onClick={() => copyToClipboard(textareaDisabledCode)} className="absolute top-2 right-2 gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => copyToClipboard(textareaDisabledCode)}
+                    className="absolute top-2 right-2 gap-2"
+                  >
                     {copied ? <CheckCheck className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     Copy
                   </Button>

@@ -1,4 +1,3 @@
-
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 import { Code, FileText, Home, Layers } from "lucide-react";
@@ -18,7 +17,7 @@ export function MainNav({ className }: MainNavProps) {
           <Layers className="h-4 w-4 text-primary-foreground" />
         </div>
         <span className="hidden font-bold sm:inline-block">
-          UI Library
+          ZAPI-UI
         </span>
       </Link>
       <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -44,7 +43,7 @@ export function MainNav({ className }: MainNavProps) {
           <span>Documentation</span>
         </Link>
         <a
-          href="https://github.com/shadcn/ui"
+          href="https://github.com/purveshjambhulkar/ZAPI-UI"
           target="_blank"
           rel="noreferrer"
           className="transition-colors hover:text-primary"

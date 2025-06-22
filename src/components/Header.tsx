@@ -1,4 +1,3 @@
-
 import { MainNav } from "./MainNav";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "@/components/ui/button";
@@ -28,7 +27,7 @@ export function Header() {
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-2">
             <a
-              href="https://github.com/shadcn/ui"
+              href="https://github.com/purveshjambhulkar/ZAPI-UI"
               target="_blank"
               rel="noreferrer"
             >
